@@ -1,0 +1,346 @@
+/* ===========================
+   Fonts
+   =========================== */
+
+@font-face {
+    font-family: "KarmaLight";
+    src: url("../fonts/KARMA-LIGHT.TTF") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "CronosProDisplay";
+    src: url("../fonts/Cronos-Pro-Display_12439.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* ===========================
+   Design-Variablen
+   =========================== */
+
+:root {
+    --rk-header-bg: #ffde94;   /* beige Kopf/Fuß */
+    --rk-body-bg:   #2b2a31;   /* dunkles Grau */
+    --rk-footer-bg: #f3c863;
+    --rk-footer-text: #333333;
+    --rk-border: #6e6969;
+
+    --rk-font-body:    "KarmaLight", serif;
+    --rk-font-heading: "CronosProDisplay", serif;
+
+    --rk-font-size-body: 16px;
+    --rk-font-size-nav:  13px;
+    --rk-font-size-h1:   26px;
+    --rk-font-size-h2:   22px;
+    --rk-font-size-teaser: 28px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ===========================
+   Grundlayout / Typografie
+   =========================== */
+
+body.page {
+    margin: 0;
+    font-family: var(--rk-font-body);
+    font-size: var(--rk-font-size-body);
+    line-height: 1.7;
+    background-color: var(--rk-body-bg);
+    color: #f5f5f5;
+}
+
+/* Überschriften im Cronos-Stil */
+
+h1, h2, h3,
+.teaser-label,
+.rk-nav-item {
+    font-family: var(--rk-font-heading);
+}
+
+/* ===========================
+   Header
+   =========================== */
+
+.rk-header {
+    background-color: var(--rk-header-bg);
+    color: #000;
+    border-bottom: 1px solid #6e6969;
+}
+
+/* Logo zentriert, Adresse rechts */
+
+.rk-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;       /* Logo-Block mittig */
+    max-width: 4260px;
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    position: relative;
+}
+
+.rk-header-spacer {
+    width: 150px;                  /* ungefähr Breite der Adresse */
+}
+
+.rk-header-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.rk-logo-img {
+    height: 70px;
+    width: auto;
+}
+
+.rk-logo-title {
+    font-size: var(--rk-font-size-h1);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.rk-logo-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 0.16em;
+}
+
+.rk-header-address {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--rk-font-heading);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+}
+
+/* ===========================
+   Navigation
+   =========================== */
+
+.rk-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0 0.7rem;
+    border-top: 1px solid #b9b29e;
+    border-bottom: 1px solid #b9b29e;
+}
+
+.rk-nav-item {
+    display: inline-block;
+    padding: 0.35rem 1.8rem;
+    font-size: var(--rk-font-size-nav);
+    letter-spacing: 0.16em;
+    color: #c2a7a7;
+    text-decoration: none;
+    border: 1px solid var(--rk-border);
+    background-color: transparent;
+    text-transform: uppercase;
+}
+
+.rk-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===========================
+   Main-Container
+   =========================== */
+
+.rk-main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.7rem 1.7rem 3rem;
+    background-color: var(--rk-body-bg);
+}
+
+/* ===========================
+   Hero-Bereich (Startseite)
+   =========================== */
+
+.hero-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr); /* nur noch 1 Spalte */
+    gap: 1.8rem;
+    align-items: center;
+    margin-bottom: 2.8rem;
+}
+
+.hero-image img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* für andere Seiten, falls du dort Text neben Bild nutzen willst */
+.hero-text h2 {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: var(--rk-font-size-h2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hero-text p {
+    margin: 0.4rem 0;
+}
+
+/* ===========================
+   Sektionen / Standardtext
+   =========================== */
+
+.section {
+    margin-top: 2.7rem;
+}
+
+.section-title h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: var(--rk-font-size-h2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.section p {
+    max-width: 60rem;
+}
+
+/* ===========================
+   Speisen / Getränke Layout
+   =========================== */
+
+.speisen-section {
+    margin-top: 1.2rem;
+}
+
+.speisen-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem;
+    margin-bottom: 1.8rem;
+}
+
+.teaser {
+    position: relative;
+    border: 2px solid #b9b29e;
+}
+
+.teaser img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.teaser-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--rk-font-size-teaser);
+    letter-spacing: 0.18em;
+    color: #c2a7a7;
+    text-transform: uppercase;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Links für PDF-Menüs */
+
+.menu-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border: 1px solid #b9b29e;
+    padding: 1rem 1.2rem;
+    margin-top: 0.6rem;
+    font-family: var(--rk-font-heading);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.menu-links a {
+    color: #ffdfa3;
+    text-decoration: none;
+}
+
+.menu-links a:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   Footer
+   =========================== */
+
+.rk-footer {
+    background-color: var(--rk-footer-bg);
+    color: var(--rk-footer-text);
+    font-family: var(--rk-font-heading);
+    font-size: 0.75rem;
+    padding: 0.7rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    border-top: 1px solid #b9b29e;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.rk-footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.rk-footer a:hover {
+    text-decoration: underline;
+}
+
+.rk-footer-sep {
+    opacity: 0.6;
+}
+
+/* ===========================
+   Responsive
+   =========================== */
+
+@media (max-width: 900px) {
+    .rk-header-top {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .rk-header-address {
+        position: static;
+        transform: none;
+        margin-top: 0.3rem;
+    }
+
+    .rk-header-spacer {
+        display: none;
+    }
+
+    .rk-nav {
+        flex-wrap: wrap;
+        padding-inline: 0.5rem;
+    }
+
+    .rk-main {
+        padding-inline: 1rem;
+    }
+
+    .speisen-grid {
+        grid-template-columns: 1fr;
+    }
+}
