@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  ratskeller_site:
+    build: .
+    image: ratskeller-site:latest
+    container_name: ratskeller-site
+    restart: unless-stopped
+    environment:
+      - PORT=8080
+    networks:
+      - web
+
+  caddy:
+    image: caddy:2
+    container_name: rk-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddy file:/etc/caddy/Caddy file:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+    depends_on:
+      - ratskeller_site
+
+networks:
+  web:
+
+volumes:
+  caddy_data:
+  caddy_config:

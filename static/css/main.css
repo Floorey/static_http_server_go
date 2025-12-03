@@ -21,9 +21,9 @@
    =========================== */
 
 :root {
-    --rk-header-bg: #ffde94;   /* beige Kopf/Fuß */
-    --rk-body-bg:   #2b2a31;   /* dunkles Grau */
-    --rk-footer-bg: #f3c863;
+    --rk-header-bg: #f7f5f2;
+    --rk-body-bg:   #afc7d5;
+    --rk-footer-bg: #f6ecdf;
     --rk-footer-text: #333333;
     --rk-border: #6e6969;
 
@@ -53,11 +53,10 @@ body.page {
     font-size: var(--rk-font-size-body);
     line-height: 1.7;
     background-color: var(--rk-body-bg);
-    color: #f5f5f5;
+    color: #f6ecdf; /* FIX: vorher ##... */
 }
 
 /* Überschriften im Cronos-Stil */
-
 h1, h2, h3,
 .teaser-label,
 .rk-nav-item {
@@ -74,12 +73,10 @@ h1, h2, h3,
     border-bottom: 1px solid #6e6969;
 }
 
-/* Logo zentriert, Adresse rechts */
-
 .rk-header-top {
     display: flex;
     align-items: center;
-    justify-content: center;       /* Logo-Block mittig */
+    justify-content: center;
     max-width: 4260px;
     margin: 0 auto;
     padding: 0.75rem 1.5rem;
@@ -87,7 +84,7 @@ h1, h2, h3,
 }
 
 .rk-header-spacer {
-    width: 150px;                  /* ungefähr Breite der Adresse */
+    width: 150px;
 }
 
 .rk-header-logo {
@@ -98,7 +95,7 @@ h1, h2, h3,
 }
 
 .rk-logo-img {
-    height: 70px;
+    height: 200px;
     width: auto;
 }
 
@@ -169,7 +166,7 @@ h1, h2, h3,
 
 .hero-row {
     display: grid;
-    grid-template-columns: minmax(0, 1fr); /* nur noch 1 Spalte */
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.8rem;
     align-items: center;
     margin-bottom: 2.8rem;
@@ -181,7 +178,60 @@ h1, h2, h3,
     object-fit: cover;
 }
 
-/* für andere Seiten, falls du dort Text neben Bild nutzen willst */
+/* --- Split Hero (2 Bilder) --- */
+
+.hero-image--split {
+    position: relative; /* für Overlay */
+}
+
+/* Rahmen um beide Bilder + flex wrap */
+.hero-image--split .hero-split {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    border: 10px solid rgba(0,0,0,0.18);
+    padding: 5px;
+    background: #f7f4ef;
+
+    transform: translateY(12px);
+}
+
+/* Responsives Sizing, sauberer Crop */
+.hero-image--split .hero-split img {
+    flex: 1 1 420px;
+    width: 100%;
+    height: clamp(260px, 40vw, 620px);
+    object-fit: cover;
+    display: block;
+}
+
+/* Textoverlay */
+.hero-image--split .hero-overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+
+    max-width: min(860px, calc(100% - 48px));
+    padding: 16px 18px;
+
+    background: rgba(247, 245, 242, 0.82);
+    border: 1px solid rgba(0,0,0,0.18);
+    backdrop-filter: blur(6px);
+
+    font-family: var(--rk-font-body); /* KarmaLight */
+    font-size: clamp(15px, 1.7vw, 22px);
+    line-height: 1.35;
+    color: rgba(0,0,0,0.82);
+}
+
+.hero-image--split .hero-overlay p {
+    margin: 0;
+}
+
+/* für andere Seiten, falls Text neben Bild */
 .hero-text h2 {
     margin-top: 0;
     margin-bottom: 0.8rem;
@@ -255,7 +305,6 @@ h1, h2, h3,
 }
 
 /* Links für PDF-Menüs */
-
 .menu-links {
     display: flex;
     flex-wrap: wrap;
@@ -342,5 +391,13 @@ h1, h2, h3,
 
     .speisen-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Overlay auf Mobile nach unten, damit es weniger verdeckt */
+    .hero-image--split .hero-overlay {
+        top: auto;
+        bottom: 14px;
+        transform: translateX(-50%);
+        padding: 12px 14px;
     }
 }
