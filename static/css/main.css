@@ -4,14 +4,14 @@
 
 @font-face {
     font-family: "KarmaLight";
-    src: url("../fonts/KARMA-LIGHT.TTF") format("truetype");
+    src: url("../Fonts/KARMA-LIGHT.TTF") format("truetype");
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
     font-family: "CronosProDisplay";
-    src: url("../fonts/Cronos-Pro-Display_12439.ttf") format("truetype");
+    src: url("../Fonts/Cronos-Pro-Display_12439.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
 }
@@ -45,18 +45,34 @@
 
 /* ===========================
    Grundlayout / Typografie
+   Sticky Footer
    =========================== */
 
 body.page {
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
     font-family: var(--rk-font-body);
     font-size: var(--rk-font-size-body);
     line-height: 1.7;
     background-color: var(--rk-body-bg);
-    color: #f6ecdf; /* FIX: vorher ##... */
+    color: #f6ecdf;
 }
 
-/* Überschriften im Cronos-Stil */
+/* Fokus: nur sichtbar bei Tastatur (JS setzt .rk-keyboard) */
+body.page :focus { outline: none; }
+body.page.rk-keyboard a:focus,
+body.page.rk-keyboard button:focus,
+body.page.rk-keyboard input:focus,
+body.page.rk-keyboard textarea:focus,
+body.page.rk-keyboard select:focus {
+    outline: 2px solid rgba(246, 236, 223, 0.85);
+    outline-offset: 3px;
+}
+
+/* Überschriften im Cronos-Stil (falls später wieder genutzt) */
 h1, h2, h3,
 .teaser-label,
 .rk-nav-item {
@@ -99,56 +115,6 @@ h1, h2, h3,
     width: auto;
 }
 
-.rk-logo-title {
-    font-size: var(--rk-font-size-h1);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-}
-
-.rk-logo-subtitle {
-    font-size: 0.9rem;
-    letter-spacing: 0.16em;
-}
-
-.rk-header-address {
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: var(--rk-font-heading);
-    font-size: 0.9rem;
-    letter-spacing: 0.08em;
-}
-
-/* ===========================
-   Navigation
-   =========================== */
-
-.rk-nav {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0 0.7rem;
-    border-top: 1px solid #b9b29e;
-    border-bottom: 1px solid #b9b29e;
-}
-
-.rk-nav-item {
-    display: inline-block;
-    padding: 0.35rem 1.8rem;
-    font-size: var(--rk-font-size-nav);
-    letter-spacing: 0.16em;
-    color: #c2a7a7;
-    text-decoration: none;
-    border: 1px solid var(--rk-border);
-    background-color: transparent;
-    text-transform: uppercase;
-}
-
-.rk-nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
 /* ===========================
    Main-Container
    =========================== */
@@ -158,6 +124,7 @@ h1, h2, h3,
     margin: 0 auto;
     padding: 1.7rem 1.7rem 3rem;
     background-color: var(--rk-body-bg);
+    flex: 1;
 }
 
 /* ===========================
@@ -181,32 +148,45 @@ h1, h2, h3,
 /* --- Split Hero (2 Bilder) --- */
 
 .hero-image--split {
-    position: relative; /* für Overlay */
+    position: relative;
 }
 
-/* Rahmen um beide Bilder + flex wrap */
 .hero-image--split .hero-split {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 
-    border: 10px solid rgba(0,0,0,0.18);
+    border: 10px solid rgba(0, 0, 0, 0.18);
     padding: 5px;
     background: #f7f4ef;
 
     transform: translateY(12px);
 }
 
-/* Responsives Sizing, sauberer Crop */
-.hero-image--split .hero-split img {
+/* Links als Kacheln */
+.hero-image--split .hero-split .rk-menu-link {
     flex: 1 1 420px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Bilder in den Links */
+.hero-image--split .hero-split .rk-menu-link img {
     width: 100%;
     height: clamp(260px, 40vw, 620px);
     object-fit: cover;
     display: block;
 }
 
-/* Textoverlay */
+/* Optional: kleiner Hover-Hinweis */
+@media (hover:hover) and (pointer:fine){
+    .hero-image--split .hero-split .rk-menu-link:hover {
+        filter: brightness(0.95);
+    }
+}
+
+/* Overlay Text (OHNE Box), KarmaLight */
 .hero-image--split .hero-overlay {
     position: absolute;
     left: 50%;
@@ -215,116 +195,138 @@ h1, h2, h3,
     z-index: 5;
 
     max-width: min(860px, calc(100% - 48px));
-    padding: 16px 18px;
+    text-align: center;
 
-    background: rgba(247, 245, 242, 0.82);
-    border: 1px solid rgba(0,0,0,0.18);
-    backdrop-filter: blur(6px);
+    background: none;
+    border: none;
+    padding: 0;
 
-    font-family: var(--rk-font-body); /* KarmaLight */
-    font-size: clamp(15px, 1.7vw, 22px);
-    line-height: 1.35;
-    color: rgba(0,0,0,0.82);
+    font-family: "KarmaLight", serif;
+    font-size: clamp(18px, 2.2vw, 30px);
+    line-height: 1.25;
+
+    color: rgba(246, 236, 223, 0.92);
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.75);
+
+    pointer-events: none;
 }
 
 .hero-image--split .hero-overlay p {
     margin: 0;
 }
 
-/* für andere Seiten, falls Text neben Bild */
-.hero-text h2 {
-    margin-top: 0;
-    margin-bottom: 0.8rem;
-    font-size: var(--rk-font-size-h2);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.hero-text p {
-    margin: 0.4rem 0;
-}
-
 /* ===========================
-   Sektionen / Standardtext
+   PDF Modal (Speisekarte)
    =========================== */
 
-.section {
-    margin-top: 2.7rem;
+.rk-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 10000;
 }
 
-.section-title h2 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: var(--rk-font-size-h2);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.section p {
-    max-width: 60rem;
-}
-
-/* ===========================
-   Speisen / Getränke Layout
-   =========================== */
-
-.speisen-section {
-    margin-top: 1.2rem;
-}
-
-.speisen-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.6rem;
-    margin-bottom: 1.8rem;
-}
-
-.teaser {
-    position: relative;
-    border: 2px solid #b9b29e;
-}
-
-.teaser img {
+.rk-modal.is-open {
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
-.teaser-label {
+.rk-modal::before {
+    content: "";
     position: absolute;
     inset: 0;
+    background: rgba(0,0,0,0.55);
+}
+
+.rk-modal-dialog {
+    position: relative;
+    width: min(1100px, calc(100% - 32px));
+    height: min(80vh, 820px);
+    margin: 8vh auto 0;
+
+    background: var(--rk-header-bg);
+    border: 1px solid rgba(0,0,0,0.18);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.rk-modal-head {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: var(--rk-font-size-teaser);
-    letter-spacing: 0.18em;
-    color: #c2a7a7;
-    text-transform: uppercase;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
 }
 
-/* Links für PDF-Menüs */
-.menu-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    border: 1px solid #b9b29e;
-    padding: 1rem 1.2rem;
-    margin-top: 0.6rem;
+.rk-modal-title {
     font-family: var(--rk-font-heading);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     font-size: 0.85rem;
+    color: #000;
 }
 
-.menu-links a {
-    color: #ffdfa3;
+.rk-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rk-modal-download {
+    font-family: var(--rk-font-heading);
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
     text-decoration: none;
+    color: #000;
+
+    padding: 0.35rem 0.6rem;
+    border: 1px solid rgba(0,0,0,0.35);
 }
 
-.menu-links a:hover {
+.rk-modal-close {
+    font-size: 28px;
+    line-height: 1;
+    padding: 0 10px;
+    border: 1px solid rgba(0,0,0,0.35);
+    background: transparent;
+    cursor: pointer;
+}
+
+.rk-modal-body {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.rk-modal-body iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Fallback-Link falls iframe PDF nicht kann */
+.rk-modal-fallback {
+    margin: 0;
+    padding: 10px 12px;
+    border-top: 1px solid rgba(0,0,0,0.12);
+    color: #000;
+    font-size: 0.9rem;
+}
+
+.rk-modal-fallback a {
+    color: #000;
     text-decoration: underline;
+}
+
+/* Scroll lock wenn Modal offen */
+body.rk-modal-open {
+    overflow: hidden;
 }
 
 /* ===========================
@@ -344,6 +346,7 @@ h1, h2, h3,
     border-top: 1px solid #b9b29e;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    margin-top: auto;
 }
 
 .rk-footer a {
@@ -370,34 +373,25 @@ h1, h2, h3,
         gap: 0.4rem;
     }
 
-    .rk-header-address {
-        position: static;
-        transform: none;
-        margin-top: 0.3rem;
-    }
-
     .rk-header-spacer {
         display: none;
-    }
-
-    .rk-nav {
-        flex-wrap: wrap;
-        padding-inline: 0.5rem;
     }
 
     .rk-main {
         padding-inline: 1rem;
     }
 
-    .speisen-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Overlay auf Mobile nach unten, damit es weniger verdeckt */
     .hero-image--split .hero-overlay {
         top: auto;
-        bottom: 14px;
+        bottom: 18px;
         transform: translateX(-50%);
-        padding: 12px 14px;
+        font-size: clamp(16px, 4.2vw, 22px);
+        max-width: min(92vw, 860px);
+    }
+
+    .rk-modal-dialog {
+        width: calc(100% - 16px);
+        height: 88vh;
+        margin: 6vh auto 0;
     }
 }

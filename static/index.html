@@ -18,23 +18,22 @@
             <div class="rk-logo-text"></div>
         </div>
     </div>
-
-    <nav class="rk-nav">
-        <a href="philosophie.html"  class="rk-nav-item">PHILOSOPHIE</a>
-        <a href="speisen.html"      class="rk-nav-item">SPEISEN &amp; GETRÄNKE</a>
-        <a href="reservierung.html" class="rk-nav-item">RESERVIERUNG</a>
-        <a href="events.html"       class="rk-nav-item">EVENTS</a>
-        <a href="bewerbungen.html"  class="rk-nav-item">BEWERBUNGEN</a>
-    </nav>
+    <!-- Navigation/Reiter: absichtlich entfernt -->
 </header>
 
 <main class="rk-main">
     <section class="hero-row hero-full">
         <div class="hero-image hero-image--split">
 
+            <!-- Bilder sind Links zur PDF (Fallback ohne JS: öffnet PDF normal) -->
             <div class="hero-split">
-                <img src="img/hero_ph.jpg" alt="Ratskeller Esslingen – Impression 1" />
-                <img src="img/hero_ch.jpg" alt="Ratskeller Esslingen – Impression 2" />
+                <a class="rk-menu-link" href="pdf/speisekarte.pdf" aria-label="Speisekarte öffnen (PDF)">
+                    <img src="img/hero_ph.jpg" alt="Speisekarte (PDF) – Bild 1" />
+                </a>
+
+                <a class="rk-menu-link" href="pdf/speisekarte.pdf" aria-label="Speisekarte öffnen (PDF)">
+                    <img src="img/hero_ch.jpg" alt="Speisekarte (PDF) – Bild 2" />
+                </a>
             </div>
 
             <div class="hero-overlay">
@@ -55,9 +54,31 @@
     <span>Am Hafenmarkt 1 · 73728 Esslingen</span>
     <span class="rk-footer-sep">|</span>
     <a href="impressum.html">Impressum</a>
-    <span class="rk-footer-sep">|</span>
-    <a href="datenschutz.html">Datenschutz</a>
 </footer>
 
+<!-- PDF Modal -->
+<div class="rk-modal" id="rk-pdf-modal" aria-hidden="true">
+    <div class="rk-modal-dialog" role="dialog" aria-modal="true" aria-label="Speisekarte">
+        <div class="rk-modal-head">
+            <div class="rk-modal-title">Speisekarte (PDF)</div>
+
+            <div class="rk-modal-actions">
+                <a class="rk-modal-download" id="rk-pdf-download" href="pdf/speisekarte.pdf" download>Download</a>
+                <button class="rk-modal-close" type="button" id="rk-pdf-close" aria-label="Schließen">×</button>
+            </div>
+        </div>
+
+        <div class="rk-modal-body">
+            <iframe id="rk-pdf-frame" title="Speisekarte PDF" loading="lazy"></iframe>
+
+            <p class="rk-modal-fallback">
+                Wenn die PDF nicht angezeigt wird:
+                <a id="rk-pdf-open" href="pdf/speisekarte.pdf">PDF in neuem Tab öffnen</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="js/rk.js"></script>
 </body>
 </html>

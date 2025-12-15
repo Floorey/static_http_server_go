@@ -1,10 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <title>Impressum – Ratskeller Esslingen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/main.css" />
 </head>
-<body>
 
+<body class="page">
+
+<header class="rk-header">
+    <div class="rk-header-logo">
+        <a href="index.html" class="rk-logo-link" aria-label="Zur Startseite">
+            <img src="img/LogoRatskeller_juni2025.png" alt="Ratskeller Esslingen" class="rk-logo-img" />
+        </a>
+        <div class="rk-logo-text"></div>
+    </div>
+
+</header>
+
+<main class="rk-main">
+    <section class="rk-legal">
+        <div class="rk-legal-card">
+            <h1>Impressum</h1>
+
+            <h2>Anbieter</h2>
+            <p>
+                Ratskeller Esslingen<br />
+                Am Hafenmarkt 1<br />
+                73728 Esslingen am Neckar<br />
+                Deutschland
+            </p>
+
+            <h2>Vertreten durch</h2>
+            <p>
+                Philipp Enderle<br />
+                Christian Koch
+            </p>
+
+            <h2>Kontakt</h2>
+            <p>
+                Telefon: <span>…</span><br />
+
+                <!-- Anti-Harvesting: keine Email im HTML -->
+                E-Mail:
+                <button
+                        type="button"
+                        class="rk-email-reveal"
+                        data-rk-email-user="info"
+                        data-rk-email-domain="ratskeller-esslingen"
+                        data-rk-email-tld="de"
+                        aria-label="E-Mail anzeigen">
+                    E-Mail anzeigen
+                </button>
+
+                <span class="rk-email-out" aria-live="polite"></span>
+                <noscript>
+                    <br />E-Mail: info [at] ratskeller-esslingen [dot] de
+                </noscript>
+            </p>
+
+            <h2>Umsatzsteuer</h2>
+            <p>
+                Umsatzsteuer-ID: <span>… (falls vorhanden)</span>
+            </p>
+
+            <h2>Haftung für Inhalte</h2>
+            <p>
+                Die Inhalte dieser Website werden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit,
+                Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
+            </p>
+
+            <h2>Haftung für Links</h2>
+            <p>
+                Diese Website enthält ggf. Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
+                Für diese fremden Inhalte übernehmen wir keine Gewähr.
+            </p>
+
+            <h2>Urheberrecht</h2>
+            <p>
+                Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem Urheberrecht.
+                Beiträge Dritter sind als solche gekennzeichnet.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer class="rk-footer">
+    <span>Öffnungszeiten: Mi.–So. von 11.30 – 23 Uhr</span>
+    <span class="rk-footer-sep">|</span>
+    <span>Inh: Philipp Enderle &amp; Christian Koch</span>
+    <span class="rk-footer-sep">|</span>
+    <span>Kontakt: Tel. …</span>
+    <span class="rk-footer-sep">|</span>
+    <span>Am Hafenmarkt 1 · 73728 Esslingen</span>
+    <span class="rk-footer-sep">|</span>
+    <a href="impressum.html">Impressum</a>
+</footer>
+
+<script src="js/rk.js"></script>
 </body>
 </html>
